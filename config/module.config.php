@@ -5,8 +5,13 @@
  */
 return array(
     'service_manager' => array(
+        'aliases' => array(
+            'authentication' => 'ZF\MvcAuth\Authentication',
+            'authorization' => 'ZF\MvcAuth\Authorization\AuthorizationInterface',
+            'ZF\MvcAuth\Authorization\AuthorizationInterface' => 'ZF\MvcAuth\Authorization\RbacAuthorization',
+        ),
         'factories' => array(
-            'ZF\MvcAuth\Authorization\AclAuthorization' => 'ZF\MvcRbac\Factory\AclAuthorizationFactory',
+            'ZF\MvcAuth\Authorization\RbacAuthorization' => 'ZF\MvcRbac\Factory\RbacAuthorizationFactory',
         ),
     ),
 );

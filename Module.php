@@ -7,6 +7,7 @@ namespace ZF\MvcRbac;
 
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\Mvc\MvcEvent;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 {
@@ -34,6 +35,15 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
+    }
+
+    public function onBootstrap(MvcEvent $mvcEvent)
+    {
+        $app = $mvcEvent->getApplication();
+        $events = $app->getEventManager();
+        $services = $app->getServiceManager();
+
+        //$events->detach($services->get('ZF\MvcAuth\Authorization\DefaultResourceResolverListener'));
     }
 
 }
